@@ -1,0 +1,73 @@
+<!doctype html>
+<!-- Renders assets/og-image.jpg (1200x630). Used by scripts/make-og.mjs; you can also open it at
+     http://localhost:5173/scripts/og.html?preview to see it and right-click → Save image. -->
+<html><head><meta charset="utf-8"><title>OG render</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#333}canvas{display:block;max-width:100%}</style></head>
+<body><canvas id="c" width="1200" height="630"></canvas>
+<script src="../config.js"></script>
+<script src="../js/stickers.js"></script>
+<script>
+(async () => {
+  const C = window.WEDDING_CONFIG;
+  const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+  const W = 1200, H = 630;
+  const load = (src) => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+  const sticker = (name) => load(URL.createObjectURL(new Blob([STICKERS[name]], { type: 'image/svg+xml' })));
+  await Promise.all([
+    document.fonts.load('110px "Great Vibes"'), document.fonts.load('700 40px "Playfair Display"'),
+    document.fonts.load('italic 500 26px "Playfair Display"'), document.fonts.load('500 26px Poppins'),
+  ]).catch(() => {});
+
+  // background
+  let g = ctx.createLinearGradient(0, 0, W, H);
+  g.addColorStop(0, '#fde8e4'); g.addColorStop(0.55, '#FFF8EE'); g.addColorStop(1, '#fdeede');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  const rg = ctx.createRadialGradient(330, 360, 20, 330, 360, 330);
+  rg.addColorStop(0, 'rgba(255,255,255,.95)'); rg.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H);
+  // mandala rings
+  ctx.strokeStyle = 'rgba(212,166,74,.35)'; ctx.lineWidth = 1.5;
+  for (const r of [150, 200, 250, 300]) { ctx.beginPath(); ctx.arc(330, 360, r, 0, Math.PI * 2); ctx.stroke(); }
+  // frame
+  ctx.strokeStyle = '#D4A64A'; ctx.lineWidth = 6; ctx.strokeRect(18, 18, W - 36, H - 36);
+  ctx.strokeStyle = 'rgba(122,31,43,.5)'; ctx.lineWidth = 1.5; ctx.setLineDash([8, 6]); ctx.strokeRect(32, 32, W - 64, H - 64); ctx.setLineDash([]);
+
+  // couple
+  let hero;
+  for (const src of [].concat(C.hero.image)) { try { hero = await load('../' + src); break; } catch {} }
+  { // keep aspect ratio; works for both painted and cut-out art
+    const h = 566, w = h * hero.naturalWidth / hero.naturalHeight;
+    ctx.save(); ctx.beginPath(); ctx.roundRect(330 - w / 2, 32, w, h, 18); ctx.clip();
+    ctx.drawImage(hero, 330 - w / 2, 32, w, h); ctx.restore();
+  }
+
+  // stickers
+  const put = async (n, x, y, s) => ctx.drawImage(await sticker(n), x, y, s, s);
+  await put('rings', 1080, 60, 64); await put('marigold', 1090, 510, 64);
+
+  // text
+  const cx = 860;
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#7A1F2B';
+  ctx.font = 'italic 500 24px "Playfair Display"';
+  ctx.fillText('S H U B H   V I V A H', cx, 150);
+  ctx.font = '120px "Great Vibes"';
+  ctx.fillText(C.couple.groom, cx - 10, 270);
+  ctx.fillStyle = '#E63E5C'; ctx.font = '54px Poppins'; ctx.fillText('❤', cx, 330);
+  ctx.fillStyle = '#7A1F2B'; ctx.font = '120px "Great Vibes"'; ctx.fillText(C.couple.bride, cx + 10, 420);
+  ctx.font = '700 34px "Playfair Display"'; ctx.fillStyle = '#3b1d1d';
+  ctx.fillText(C.hero.tagline, cx, 480);
+  ctx.font = '500 24px Poppins'; ctx.fillStyle = '#6d4b4b';
+  ctx.fillText(C.wedding.dateLabel, cx, 522);
+  // pill
+  ctx.fillStyle = '#7A1F2B';
+  const pw = 240, ph = 50; ctx.beginPath(); ctx.roundRect(cx - pw / 2, 548, pw, ph, 25); ctx.fill();
+  ctx.strokeStyle = '#D4A64A'; ctx.lineWidth = 2; ctx.stroke();
+  ctx.fillStyle = '#FFF8EE'; ctx.font = '500 22px Poppins'; ctx.fillText('Tap to open 💌', cx, 581);
+
+  const url = cv.toDataURL('image/jpeg', 0.88);
+  if (location.search.includes('preview')) return;
+  document.body.innerHTML = '<pre id="out">' + url + '</pre>';
+})();
+</script></body></html>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 30" width="96" height="30" aria-hidden="true"><defs>
+  <radialGradient id="roseR" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#F0566E"/><stop offset=".55" stop-color="#C21A38"/><stop offset="1" stop-color="#7A0E20"/></radialGradient>
+  <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5DA56A"/><stop offset="1" stop-color="#2C6B3A"/></linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B8862F"/><stop offset=".5" stop-color="#F1D27A"/><stop offset="1" stop-color="#A9781F"/></linearGradient>
+</defs>
+    <rect width="96" height="30" fill="none"/>
+    <path d="M0,2.5 H96 M0,6 H96" stroke="#C99A3A" stroke-width="1.4"/>
+    <path d="M0,27.5 H96" stroke="#C99A3A" stroke-width="1.2" stroke-dasharray="1 3" stroke-linecap="round"/>
+    <!-- temple arches (kangura) -->
+    <path d="M0,6 Q12,22 24,6 Q36,22 48,6 Q60,22 72,6 Q84,22 96,6" fill="none" stroke="#7A1F2B" stroke-width="1" opacity=".55"/>
+    <circle cx="12" cy="15" r="1.3" fill="#C99A3A"/><circle cx="36" cy="15" r="1.3" fill="#C99A3A"/><circle cx="60" cy="15" r="1.3" fill="#C99A3A"/><circle cx="84" cy="15" r="1.3" fill="#C99A3A"/>
+    <!-- rose with leaves, then a gold buta -->
+    <g transform="translate(24 19) rotate(200)"><path d="M0,0 Q4.5,-3.24 9,0 Q4.5,3.24 0,0Z" fill="url(#leaf)"/><path d="M0.72,0 L7.65,0" stroke="#A9D7A6" stroke-width="0.36" opacity=".8"/></g><g transform="translate(24 19) rotate(-20)"><path d="M0,0 Q4.5,-3.24 9,0 Q4.5,3.24 0,0Z" fill="url(#leaf)"/><path d="M0.72,0 L7.65,0" stroke="#A9D7A6" stroke-width="0.36" opacity=".8"/></g>
+    <circle cx="24" cy="14.4" r="3.72" fill="url(#roseR)" stroke="#5A0A18" stroke-opacity=".35" stroke-width="0.31"/><circle cx="26.48" cy="16.2" r="3.72" fill="url(#roseR)" stroke="#5A0A18" stroke-opacity=".35" stroke-width="0.31"/><circle cx="25.53" cy="19.11" r="3.72" fill="url(#roseR)" stroke="#5A0A18" stroke-opacity=".35" stroke-width="0.31"/><circle cx="22.47" cy="19.11" r="3.72" fill="url(#roseR)" stroke="#5A0A18" stroke-opacity=".35" stroke-width="0.31"/><circle cx="21.52" cy="16.2" r="3.72" fill="url(#roseR)" stroke="#5A0A18" stroke-opacity=".35" stroke-width="0.31"/><circle cx="24" cy="17" r="3.84" fill="#C21A38"/><path d="M21.4,17.5 a2.6,2.6 0 1 1 3.84,1.86 a1.61,1.61 0 1 1 -1.24,-2.6 a0.74,0.74 0 1 1 -0.25,1.24" fill="none" stroke="#5A0A18" stroke-width="0.56" stroke-linecap="round" opacity=".7"/><path d="M19.66,16.07 Q21.83,11.73 25.86,12.54" fill="none" stroke="#FFB3C0" stroke-width="0.5" stroke-linecap="round" opacity=".75"/>
+    <g transform="translate(72 16) rotate(0) scale(0.75)"><path d="M0,10 C-9,10 -10,-1 -4,-6 C1,-10 8,-9 9,-3 C10,2 5,4 3,1 C1,-2 4,-4 6,-3" fill="none" stroke="url(#gold)" stroke-width="1.4" stroke-linecap="round"/><path d="M0,10 C-6,9 -7,1 -3,-3" fill="none" stroke="url(#gold)" stroke-width=".8"/><circle cx="-1" cy="3" r="1.6" fill="#7A1F2B"/></g>
+    <circle cx="48" cy="19" r="1.8" fill="#C21A38"/><circle cx="0" cy="19" r="1.8" fill="#C21A38"/><circle cx="96" cy="19" r="1.8" fill="#C21A38"/></svg>

@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "wedding",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["scripts/serve.mjs"],
+      "port": 5173
+    },
+    {
+      "name": "shivam-weds-prachi",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["-e", "process.env.PORT='5177'; import('file:///C:/Users/nidhi/Rakeh-prj/shivam-weds-prachi/scripts/serve.mjs')"],
+      "port": 5177
+    }
+  ]
+}

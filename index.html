@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Shivam ❤ Prachi · Shubh Vivah · 21 November 2026</title>
+  <meta name="description" content="You're invited! Join Shivam & Prachi for their wedding celebrations — Ladies Sangeet & Wedding ❤" />
+  <meta name="theme-color" content="#7A1F2B" />
+
+  <!-- ✏️ WhatsApp / social preview. Live address of the site (must be absolute). -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Shivam weds Prachi" />
+  <meta property="og:title" content="Shivam ❤ Prachi · You're invited!" />
+  <meta property="og:description" content="Shubh Vivah · 20–21 November 2026. Tap to see the celebrations 💍" />
+  <meta property="og:url" content="https://rakesh-b01.github.io/shivam-weds-prachi/" />
+  <meta property="og:image" content="https://rakesh-b01.github.io/shivam-weds-prachi/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Illustrated bride and groom in wedding outfits" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://rakesh-b01.github.io/shivam-weds-prachi/assets/og-image.jpg" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/illustrations/hero.jpg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- hold the hero entrance animation until the welcome screen is opened (set before first paint) -->
+  <script>document.documentElement.classList.add('gate-closed');</script>
+</head>
+<body>
+  <!-- ============ WELCOME SCREEN: its tap opens the invitation and starts the music ============ -->
+  <div class="intro-gate" id="introGate" role="dialog" aria-modal="true" aria-labelledby="gateNames">
+    <div class="intro-gate__card">
+      <p class="intro-gate__sub" data-bind="hero.subTagline"></p>
+      <h2 class="intro-gate__names" id="gateNames">
+        <span data-bind="couple.groom"></span>
+        <span class="intro-gate__amp" aria-label="and">&amp;</span>
+        <span data-bind="couple.bride"></span>
+      </h2>
+      <span class="intro-gate__divider" aria-hidden="true"></span>
+      <p class="intro-gate__date" data-bind="wedding.dateLabel"></p>
+      <button class="intro-gate__btn" id="introGateBtn" type="button">Tap to open the invitation 💌</button>
+      <p class="intro-gate__note">♪ with music</p>
+    </div>
+  </div>
+
+  <a class="skip" href="#celebrations">Skip to the celebrations</a>
+  <!-- petals fall over the whole page while scrolling -->
+  <div class="petals" aria-hidden="true"></div>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero" id="top">
+    <div class="toran" aria-hidden="true"></div>
+    <div class="hero__painting hero-in" style="--d:.6s; --dur:2.2s">
+      <img id="heroImg" alt="Illustration of the bride and groom in wedding attire under a floral mandap" fetchpriority="high" decoding="async" />
+    </div>
+    <div class="hero__inner">
+      <p class="hero__kicker hero-in" style="--d:1.5s" data-bind="hero.kicker"></p>
+      <h1 class="hero__names hero-in" style="--d:1.8s; --dur:1.9s">
+        <span class="hero__name" data-bind="couple.groom"></span>
+        <span class="hero__amp" aria-label="and">&amp;</span>
+        <span class="hero__name" data-bind="couple.bride"></span>
+      </h1>
+      <p class="hero__tagline hero-in" style="--d:2.3s" data-bind="hero.tagline"></p>
+      <p class="hero__sub hero-in" style="--d:2.6s" data-bind="hero.subTagline"></p>
+      <p class="hero__invite hero-in" style="--d:2.9s" data-bind="hero.invite"></p>
+      <a class="scroll-cue" href="#family" aria-label="Scroll to celebrate">
+        <span>Scroll to celebrate</span>
+        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ FAMILY INVITATION (from the printed card) ============ -->
+    <section class="section family" id="family">
+      <div class="family__card reveal" id="familyCard"></div>
+    </section>
+
+    <!-- ============ CELEBRATIONS ============ -->
+    <section class="section events" id="celebrations">
+      <div class="sticker-layer" data-stickers="marigold:3:4:40:spin, diya:91:5:40:bob"></div>
+      <p class="eyebrow reveal">save the dates</p>
+      <h2 class="section__title reveal">The Celebrations</h2>
+      <p class="section__lede reveal">Dates, timings and venues for every celebration.</p>
+      <div class="carousel reveal" id="eventCarousel" role="list"></div>
+    </section>
+
+    <!-- ============ SCRATCH CARD ============ -->
+    <section class="section scratch" id="date">
+      <div class="sticker-layer" data-stickers="sparkle:6:10:34:spin, heartGold:88:8:38:float, sparkle:90:78:26:spin, heartPink:4:82:30:float"></div>
+      <p class="eyebrow reveal">psst… a secret</p>
+      <h2 class="section__title reveal">Scratch to reveal our big day ✨</h2>
+      <div class="scratch-card reveal" id="scratchCard">
+        <div class="scratch-card__prize">
+          <span class="scratch-card__kicker">Save the date</span>
+          <strong class="scratch-card__date" id="revealDate"></strong>
+          <span class="scratch-card__names" id="revealNames"></span>
+        </div>
+        <canvas class="scratch-card__foil" id="scratchCanvas" aria-label="Scratch card. Rub with your finger or mouse to reveal the wedding date."></canvas>
+        <button class="scratch-card__skip" id="scratchSkip" type="button">Can't scratch? Tap to reveal</button>
+      </div>
+      <p class="scratch__msg" id="scratchMsg" aria-live="polite"></p>
+      <div class="countdown" id="countdown" hidden>
+        <div class="countdown__box"><b data-cd="d">0</b><span>Days</span></div>
+        <div class="countdown__box"><b data-cd="h">0</b><span>Hours</span></div>
+        <div class="countdown__box"><b data-cd="m">0</b><span>Minutes</span></div>
+        <div class="countdown__box"><b data-cd="s">0</b><span>Seconds</span></div>
+      </div>
+    </section>
+
+    <!-- ============ VENUE ============ -->
+    <section class="section venue" id="venue">
+      <p class="eyebrow reveal">find your way</p>
+      <h2 class="section__title reveal">Where it's happening</h2>
+      <div class="venue__card reveal">
+        <div class="venue__pin sticker" data-sticker="pin"></div>
+        <h3 class="venue__name" data-bind="venue.name"></h3>
+        <p class="venue__address" data-bind="venue.address"></p>
+        <div class="venue__map">
+          <iframe id="venueMap" title="Map of the wedding venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+        <a class="btn btn--primary" id="directionsBtn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2 4 20l8-4 8 4z" fill="currentColor"/></svg>
+          Get Directions
+        </a>
+        <ul class="venue__notes">
+          <li data-bind="venue.landmark"></li>
+          <li data-bind="venue.parking"></li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer__hearts" aria-hidden="true"></div>
+    <p class="footer__with">With love,</p>
+    <p class="footer__names"><span data-bind="couple.groom"></span> &amp; <span data-bind="couple.bride"></span></p>
+    <button class="footer__tag" id="hashtag" type="button" title="Tap to copy"></button>
+    <div class="footer__contact" id="contacts"></div>
+    <p class="footer__small">Made with ❤ for our favourite people</p>
+    <!-- credit: filled from config.credit -->
+    <div class="footer__credit" id="footerCredit"></div>
+  </footer>
+
+  <!-- Music toggle -->
+  <button class="music-btn" id="musicBtn" type="button" aria-pressed="true" aria-label="Pause background music">
+    <span class="music-btn__icon" aria-hidden="true">♪</span>
+    <span class="music-btn__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+
+  <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+
+  <script src="config.js"></script>
+  <script src="js/stickers.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>RSVP Admin · Vijay ❤ Rashima</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --maroon: #7A1F2B; --gold: #D4A64A; --blush: #F6D6D6; --ivory: #FFF8EE; --ink: #3b1d1d; --soft: #6d4b4b; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Poppins, system-ui, sans-serif; color: var(--ink); background: var(--ivory); font-size: 14px; }
+    [hidden] { display: none !important; }
+    header { background: linear-gradient(135deg, var(--maroon), #a3283a); color: #fff; padding: 18px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    header h1 { margin: 0; font-family: 'Great Vibes', cursive; font-weight: 400; font-size: 34px; color: #F3D58A; line-height: 1; }
+    header p { margin: 2px 0 0; opacity: .8; font-size: 12px; }
+    main { padding: 16px; max-width: 1200px; margin: 0 auto; }
+    .btn { border: 0; border-radius: 999px; padding: 10px 18px; font: inherit; font-weight: 500; cursor: pointer; background: var(--maroon); color: #fff; min-height: 42px; }
+    .btn--gold { background: var(--gold); color: #2a1414; }
+    .btn--ghost { background: rgba(255,255,255,.15); color: #fff; }
+    .login { max-width: 360px; margin: 12vh auto; background: #fff; border-radius: 22px; padding: 28px 22px; box-shadow: 0 10px 30px rgba(122,31,43,.14); text-align: center; border: 1.5px solid rgba(212,166,74,.5); }
+    .login h2 { font-family: 'Playfair Display', serif; color: var(--maroon); margin: 0 0 6px; }
+    .login input { width: 100%; font: inherit; font-size: 16px; padding: 12px 14px; border-radius: 14px; border: 1.5px solid #ead0c8; margin: 14px 0 10px; }
+    .login .btn { width: 100%; }
+    .err { color: #c0262d; min-height: 1.4em; margin: 8px 0 0; font-size: 13px; }
+    .banner { background: #fff3cd; border: 1px solid #f0d68a; border-radius: 12px; padding: 10px 14px; margin-bottom: 14px; font-size: 13px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 14px; }
+    .stat { background: #fff; border-radius: 16px; padding: 14px; box-shadow: 0 4px 14px rgba(122,31,43,.08); border: 1px solid rgba(212,166,74,.35); }
+    .stat b { display: block; font-family: 'Playfair Display', serif; font-size: 28px; color: var(--maroon); line-height: 1.1; }
+    .stat span { font-size: 12px; color: var(--soft); text-transform: uppercase; letter-spacing: .08em; }
+    .stat small { display: block; color: var(--soft); margin-top: 4px; font-size: 12px; }
+    .breakdown { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .pill { background: #fff; border: 1px solid rgba(212,166,74,.5); border-radius: 999px; padding: 6px 12px; font-size: 13px; }
+    .pill b { color: var(--maroon); }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+    .toolbar input, .toolbar select { font: inherit; font-size: 15px; padding: 9px 12px; border-radius: 12px; border: 1.5px solid #ead0c8; background: #fff; }
+    .toolbar input { flex: 1 1 200px; }
+    .table-wrap { overflow-x: auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 14px rgba(122,31,43,.08); border: 1px solid rgba(212,166,74,.35); }
+    table { border-collapse: collapse; width: 100%; min-width: 860px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #f3e4dc; vertical-align: top; }
+    th { background: #fbefe9; color: var(--maroon); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; position: sticky; top: 0; }
+    tr:hover td { background: #fffaf5; }
+    .yes { color: #1f7a4d; font-weight: 600; } .no { color: #b3261e; font-weight: 600; }
+    .msg { max-width: 280px; white-space: pre-wrap; color: var(--soft); }
+    .tag { display: inline-block; background: var(--blush); border-radius: 999px; padding: 1px 8px; margin: 1px; font-size: 12px; }
+    .empty { padding: 30px; text-align: center; color: var(--soft); }
+    a { color: var(--maroon); }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Vijay ❤ Rashima</h1>
+      <p>RSVP dashboard</p>
+    </div>
+    <div id="headerActions" hidden>
+      <button class="btn btn--gold" id="refreshBtn" type="button">↻ Refresh</button>
+      <button class="btn btn--ghost" id="logoutBtn" type="button">Log out</button>
+    </div>
+  </header>
+
+  <main>
+    <form class="login" id="loginForm">
+      <h2>Admin login</h2>
+      <p style="color:var(--soft);margin:0">Enter the admin password to view RSVPs.</p>
+      <input type="password" id="pw" autocomplete="current-password" placeholder="Password" required />
+      <button class="btn" type="submit" id="loginBtn">View RSVPs</button>
+      <p class="err" id="loginErr" role="alert"></p>
+    </form>
+
+    <section id="dash" hidden>
+      <div class="banner" id="demoBanner" hidden>
+        <strong>Demo mode:</strong> Supabase isn't configured in <code>config.js</code>, so you're seeing RSVPs saved in <em>this browser only</em>.
+        Follow README.md to connect the database before sharing the link.
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="breakdown" id="breakdown"></div>
+      <div class="toolbar">
+        <input type="search" id="search" placeholder="Search name, phone, message…" aria-label="Search RSVPs" />
+        <select id="filter" aria-label="Filter by attendance">
+          <option value="all">All responses</option>
+          <option value="yes">Attending</option>
+          <option value="no">Declined</option>
+        </select>
+        <button class="btn" id="csvBtn" type="button">⬇ Export CSV</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Received</th><th>Name</th><th>Phone</th><th>Attending</th><th>Guests</th><th>Functions</th><th>Food</th><th>Message</th></tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="../config.js"></script>
+  <script>
+  (function () {
+    'use strict';
+    const CFG = window.WEDDING_CONFIG;
+    const SB = CFG.supabase || {};
+    const DEMO = !(SB.url && SB.anonKey);
+    const $ = (s) => document.querySelector(s);
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const FN = Object.fromEntries((CFG.events || []).map((e) => [e.id, e.name]));
+    const FOOD = { veg: 'Veg', nonveg: 'Non-veg', jain: 'Jain' };
+    let rows = [];
+
+    async function fetchRsvps(password) {
+      if (DEMO) {
+        if (password !== CFG.demoAdminPassword) throw new Error('Wrong password');
+        return JSON.parse(localStorage.getItem('rsvps-demo') || '[]').sort((a, b) => b.created_at.localeCompare(a.created_at));
+      }
+      const res = await fetch(`${SB.url.replace(/\/$/, '')}/rest/v1/rpc/admin_get_rsvps`, {
+        method: 'POST',
+        headers: { apikey: SB.anonKey, Authorization: `Bearer ${SB.anonKey}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_password: password }),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(/password/i.test(body.message || '') ? 'Wrong password' : (body.message || res.statusText));
+      }
+      return res.json();
+    }
+
+    async function login(password) {
+      $('#loginErr').textContent = '';
+      $('#loginBtn').textContent = 'Checking…';
+      try {
+        rows = await fetchRsvps(password);
+        sessionStorage.setItem('rsvp-admin-pw', password);
+        $('#loginForm').hidden = true;
+        $('#dash').hidden = false;
+        $('#headerActions').hidden = false;
+        $('#demoBanner').hidden = !DEMO;
+        render();
+      } catch (e) {
+        sessionStorage.removeItem('rsvp-admin-pw');
+        $('#loginErr').textContent = e.message === 'Wrong password' ? 'That password didn’t work.' : `Couldn’t load RSVPs: ${e.message}`;
+      } finally {
+        $('#loginBtn').textContent = 'View RSVPs';
+      }
+    }
+
+    function filtered() {
+      const q = $('#search').value.trim().toLowerCase();
+      const f = $('#filter').value;
+      return rows.filter((r) => (f === 'all' || (f === 'yes') === r.attending) &&
+        (!q || [r.full_name, r.phone, r.message].some((v) => (v || '').toLowerCase().includes(q))));
+    }
+
+    function render() {
+      const yes = rows.filter((r) => r.attending);
+      const totalGuests = yes.reduce((s, r) => s + (r.guests || 0), 0);
+      $('#stats').innerHTML = [
+        ['Total guests', totalGuests, 'people attending (incl. +ones)'],
+        ['Responses', rows.length, ''],
+        ['Attending', yes.length, 'households / parties'],
+        ['Declined', rows.length - yes.length, ''],
+      ].map(([l, v, s]) => `<div class="stat"><span>${l}</span><b>${v}</b>${s ? `<small>${s}</small>` : ''}</div>`).join('');
+
+      const perFn = Object.keys(FN).map((id) => [FN[id], yes.filter((r) => (r.functions || []).includes(id)).reduce((s, r) => s + r.guests, 0)]);
+      const perFood = Object.keys(FOOD).map((k) => [FOOD[k], yes.filter((r) => r.food === k).reduce((s, r) => s + r.guests, 0)]);
+      $('#breakdown').innerHTML = perFn.map(([n, v]) => `<span class="pill">${esc(n)}: <b>${v}</b> guests</span>`).join('') +
+        perFood.map(([n, v]) => `<span class="pill">🍽 ${n}: <b>${v}</b></span>`).join('');
+
+      const list = filtered();
+      $('#rows').innerHTML = list.length ? list.map((r, i) => `<tr>
+        <td>${i + 1}</td>
+        <td>${esc(new Date(r.created_at).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }))}</td>
+        <td><strong>${esc(r.full_name)}</strong></td>
+        <td><a href="tel:${esc(r.phone.replace(/[^\d+]/g, ''))}">${esc(r.phone)}</a></td>
+        <td class="${r.attending ? 'yes' : 'no'}">${r.attending ? 'Yes' : 'No'}</td>
+        <td>${r.attending ? r.guests : '—'}</td>
+        <td>${(r.functions || []).map((f) => `<span class="tag">${esc(FN[f] || f)}</span>`).join('') || '—'}</td>
+        <td>${esc(FOOD[r.food] || '—')}</td>
+        <td class="msg">${esc(r.message || '')}</td>
+      </tr>`).join('') : `<tr><td colspan="9" class="empty">No RSVPs ${rows.length ? 'match your search' : 'yet — share the link! 💌'}</td></tr>`;
+    }
+
+    function exportCsv() {
+      const cell = (v) => { const s = String(v ?? ''); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+      const head = ['Received', 'Name', 'Phone', 'Attending', 'Guests', ...Object.values(FN), 'Food', 'Message'];
+      const lines = filtered().map((r) => [
+        new Date(r.created_at).toLocaleString('en-IN'), r.full_name, r.phone, r.attending ? 'Yes' : 'No', r.attending ? r.guests : 0,
+        ...Object.keys(FN).map((id) => ((r.functions || []).includes(id) ? 'Yes' : '')), FOOD[r.food] || '', r.message || '',
+      ].map(cell).join(','));
+      const csv = '﻿' + [head.map(cell).join(','), ...lines].join('\r\n');
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+      a.download = `rsvps-vijay-rashima-${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(a); a.click(); a.remove();
+    }
+
+    $('#loginForm').addEventListener('submit', (e) => { e.preventDefault(); login($('#pw').value); });
+    $('#search').addEventListener('input', render);
+    $('#filter').addEventListener('change', render);
+    $('#csvBtn').addEventListener('click', exportCsv);
+    $('#refreshBtn').addEventListener('click', () => login(sessionStorage.getItem('rsvp-admin-pw') || ''));
+    $('#logoutBtn').addEventListener('click', () => { sessionStorage.removeItem('rsvp-admin-pw'); location.reload(); });
+
+    const saved = sessionStorage.getItem('rsvp-admin-pw');
+    if (saved) login(saved);
+  })();
+  </script>
+</body>
+</html>
